@@ -1,5 +1,6 @@
 package UserManagementSystem;
 
+import Database.Database;
 import Librarian.Librarian;
 
 import java.io.BufferedInputStream;
@@ -161,6 +162,8 @@ public class UserManagement {
     public static void main(String[] args) {
         UserManagement obj = new UserManagement();
         obj.AskUserType();
+        Database objOne = new Database();
+
     }
 
 

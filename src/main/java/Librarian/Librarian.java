@@ -1,5 +1,7 @@
 package Librarian;
 
+import Database.Database;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,7 @@ public class Librarian {
                 if (val.getName().equals(userName) && val.getID().equals(ID)){
                     System.out.println("Present");
                     ValidLibrarian = false;
+                    AccessToDatabase();
                 }else{
                     System.out.println("ENTER YOUR CREDENTIALS AGAIN !!! \n");
                     try {
@@ -38,9 +41,24 @@ public class Librarian {
                 }
             }
         }while (ValidLibrarian);
+    }
 
+    public void AccessToDatabase() {
+        System.out.print("ACCESSING DATABASE");
+        try {
+            animation();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        new Database();
+    }
 
-
+    public static void animation() throws InterruptedException {
+        for (int i = 0; i < 3; i++){
+            TimeUnit.SECONDS.sleep(1);
+            System.out.print(".");
+        }
+        System.out.println("\n");
     }
 
 
