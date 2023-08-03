@@ -162,7 +162,6 @@ public class UserManagement {
     public static void main(String[] args) {
         UserManagement obj = new UserManagement();
         obj.AskUserType();
-        Database objOne = new Database();
 
     }
 

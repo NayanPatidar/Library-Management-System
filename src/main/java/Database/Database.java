@@ -296,6 +296,7 @@ public class Database {
                 }
             }
         }
+        System.out.println("BOOK IS NOT FOUND");
         return false;
     }
 
