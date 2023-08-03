@@ -15,14 +15,14 @@ public class Database {
     private ArrayList<DATABASE_FIELDS> databaseArrayList= new ArrayList<>();
     public boolean BookFoundOfNot;
 
-    public Database(String title, String author, String nameOfYourClass){
+    public Database(String title, String author, String nameOfYourClass, int Request){
         databaseArrayList.add(new DATABASE_FIELDS("To Kill a Mockingbird", "Harper Lee", "9780061120084", "Harper Perennial Modern Classics",4));
         databaseArrayList.add(new DATABASE_FIELDS("1984", "George Orwell", "9780451524935", "Signet Classics",2));
         databaseArrayList.add(new DATABASE_FIELDS( "The Great Gatsby","F. Scott Fitzgerald", "9780743273565", "Scribner",3));
         databaseArrayList.add(new DATABASE_FIELDS( "Harry Potter","123", "12345", "JKR",1));
         this.title = title;
         this.author = author;
-        BookOrLibrarian(nameOfYourClass);
+        BookOrLibrarian(nameOfYourClass, Request);
 
     }
 
@@ -34,12 +34,26 @@ public class Database {
         LibrarianAccess();
     }
 
-    private void BookOrLibrarian(String bookOrLibrarianorAccount){
-        if (bookOrLibrarianorAccount == "BOOK"){
+    private void BookOrLibrarian(String bookOrLibrarianorAccount, int request){
+        if (bookOrLibrarianorAccount == "BOOK" && request == 1){
+           // This is for requesting
             BookAccess();
-        } else if (bookOrLibrarianorAccount == "LIBRARIAN") {
+        }
+        else if (bookOrLibrarianorAccount == "BOOK" && request == 0) {
+            // This is for searching book
+            try {
+                animation();
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            BookFoundOfNot =
+                    Search(title, author, null , null , "SEARCH");
+        }
+        else if (bookOrLibrarianorAccount == "LIBRARIAN") {
             LibrarianAccess();
-        } else if (bookOrLibrarianorAccount == "ACCOUNT") {
+        }
+        else if (bookOrLibrarianorAccount == "ACCOUNT") {
             System.out.println("YOU ARE IN ACCOUNT");
             try {
                 TimeUnit.SECONDS.sleep(3);
@@ -47,7 +61,8 @@ public class Database {
                 throw new RuntimeException(e);
             }
             AccountAccess();
-        } else {
+        }
+        else {
             System.out.println("ENTER CORRECT CLASS YOU CHOMU !!");
         }
     }
@@ -216,7 +231,7 @@ public class Database {
 
     private void delete(String title, String author) {
         Iterator<DATABASE_FIELDS> iterator = databaseArrayList.iterator();
-
+        System.out.println("in delete");
         while (iterator.hasNext()) {
             DATABASE_FIELDS data = iterator.next();
             if (data.getTitle().equals(title) && data.getAuthor().equals(author)) {
@@ -311,6 +326,7 @@ public class Database {
         for (DATABASE_FIELDS val : databaseArrayList){
             if (val.getTitle().equalsIgnoreCase(title) && val.getAuthor().equalsIgnoreCase(author)){
 //                System.out.println("BOOK IS PRESENT AND HAS BEEN REQUESTED");
+                System.out.println("deleting");
                 delete(title, author);
                 return true;
             }
@@ -362,7 +378,7 @@ public class Database {
 
     public static void main(String[] args) {
         //"Harry Potter","123", "12345", "JKR",5
-        Database obj = new Database("Harry Potter","JKR", "BOOK");
+        Database obj = new Database("Harry Potter","JKR", "BOOK", 1);
 //        System.out.println(obj.BookFoundOfNot);
 //        Database obj = new Database("Harry Potter", "JKR", );
 

@@ -89,7 +89,7 @@ public class Accounts {
                   val= Books.calling_book(UserName, id);
             System.out.println(val.Author);
             System.out.println(val.Title);
-            Database obj = new Database(val.Title, val.Author, "ACCOUNT");
+            Database obj = new Database(val.Title, val.Author, "ACCOUNT", 1);
 
             fine_status(UserName, id);
         } else if (payment_verifiaction > 2 && payment_verifiaction < 0) {
@@ -156,7 +156,7 @@ public class Accounts {
 
     // adding all information of the user related to book
 
-    public void AccUserBookInformation_Add(String username, int uuid) throws InterruptedException {
+    public boolean AccUserBookInformation_Add(String username, int uuid,int req) throws InterruptedException {
         boolean verification = true;
         // System.out.println("my size is now "+all_data_of_Accounts.size());
         System.out.println("WAIT .......");
@@ -183,6 +183,8 @@ public class Accounts {
             }
 
             if(choice==1){
+//                Database obj = new Database()
+                Books.req=1;
                 CustomDataAccount cda = new CustomDataAccount();
 
                 cda.Acc_UserName = username;
@@ -213,6 +215,7 @@ public class Accounts {
             }
             System.out.println("!!!!!! USER CANNOT BORROW MORE THAN ONE BOOK !!!! ");
         }
+        return false;
 
     }
 

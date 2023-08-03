@@ -50,8 +50,8 @@ public class Librarian {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        new Database();
-//     TODO to show divyansh   Database obj = new Database("Harry Potter","JKR", "BOOK");
+//        new Database();
+      Database obj = new Database("Harry Potter","JKR", "BOOK", 1);
 
     }
 
@@ -64,6 +64,7 @@ public class Librarian {
     }
 
     public static void main(String[] args) {
+        Librarian obj = new Librarian("nayan");
     }
 
 

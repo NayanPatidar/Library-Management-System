@@ -10,6 +10,7 @@ public class Books {
   public  static ArrayList<BookCustomData> All_InformationOf_Book = new ArrayList<BookCustomData>();
     private int renew_var;
     private int ele=0;
+    public  static int req=0;
     private String Title, Author, Publication;
 
     // show due date
@@ -23,8 +24,7 @@ public class Books {
        BookCustomDataReturn returning=new BookCustomDataReturn();
         for(int i=0;i< All_InformationOf_Book.size();i++){
             if(All_InformationOf_Book.get(i).BookUName.equalsIgnoreCase(UsNa) && All_InformationOf_Book.get(i).BookUID==id){
-                System.out.println("Here");
-                Database obj = new Database(All_InformationOf_Book.get(i).Title, All_InformationOf_Book.get(i).Author, "BOOK" );
+
 //           BookCustomDataReturn returning=new BookCustomDataReturn();
            returning.Author=All_InformationOf_Book.get(i).Author;
            returning.Title= All_InformationOf_Book.get(i).Title;
@@ -46,30 +46,58 @@ public class Books {
     }
 
     public void Book_Request(String USERNAME,int USERID) {
+        boolean looping=true;
         BookCustomData BCD=new BookCustomData();
         BCD.BookUName=USERNAME;
         BCD.BookUID=USERID;
          Scanner sc = new Scanner(System.in);
+         while(looping) {
 
-         System.out.println("\nENTER THE \"TITLE\" OF BOOK\n");
+             System.out.println("ENTER THE \"TITLE\" OF BOOK");
 
-         BCD.Title = sc.nextLine();
+             BCD.Title = sc.nextLine();
 
-         System.out.println("\nENTER THE \"AUTHOR\" OF BOOK\n");
+             System.out.println("ENTER THE \"AUTHOR\" OF BOOK");
 
-         BCD.Author = sc.nextLine();
+             BCD.Author = sc.nextLine();
 
-         System.out.println("\nENTER THE \"PUBLICATION\" OF BOOK\n");
+             System.out.println("ENTER THE \"PUBLICATION\" OF BOOK");
 
-         BCD.Publication = sc.nextLine();
-        All_InformationOf_Book.add(BCD);
+             BCD.Publication = sc.nextLine();
+             All_InformationOf_Book.add(BCD);
+             System.out.println("This is just for searching");
+             Database obj = new Database(BCD.Title, BCD.Author, "BOOK", 0);
+//        System.out.println(obj.BookFoundOfNot);
+             try {
+                 Accounts uAccounts = new Accounts();
+                 if (obj.BookFoundOfNot) {
+                      req=0;
+                     looping=uAccounts.AccUserBookInformation_Add(USERNAME, USERID,req);
+                     if(req==1){
+                         //calling the database
+                         System.out.println("---REQUESTING---");
+                         Database ObjOne = new Database(BCD.Title, BCD.Author,"BOOK", 1 );
+                         System.out.println(ObjOne.BookFoundOfNot);
+                     }
 
-        try {
-            Accounts uAccounts=new Accounts();
-            uAccounts.AccUserBookInformation_Add(USERNAME, USERID);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+                 } else {
+                     int lool;
+                     Scanner sc1=new Scanner(System.in);
+                     System.out.println("SELECT OPTION CHOICE : ");
+                     System.out.println("1. AGAIN REENTER DETAILS ");
+                     System.out.println("2. EXITS ");
+                     lool=sc1.nextInt();
+                     if(lool==1){
+//                         continue;
+                     }else{
+                         looping=false;
+                     }
+
+                 }
+             } catch (Exception e) {
+                 // TODO: handle exception
+             }
+         }
 
 
     }
