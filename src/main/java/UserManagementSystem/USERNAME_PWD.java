@@ -1,4 +1,4 @@
 package UserManagementSystem;
 
-public class UserManagement {
+public class USERNAME_PWD {
 }
