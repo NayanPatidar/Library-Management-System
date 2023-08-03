@@ -40,6 +40,12 @@ public class Database {
         } else if (bookOrLibrarianorAccount == "LIBRARIAN") {
             LibrarianAccess();
         } else if (bookOrLibrarianorAccount == "ACCOUNT") {
+            System.out.println("YOU ARE IN ACCOUNT");
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             AccountAccess();
         } else {
             System.out.println("ENTER CORRECT CLASS YOU CHOMU !!");

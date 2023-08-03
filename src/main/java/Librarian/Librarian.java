@@ -40,7 +40,7 @@ public class Librarian {
                     }
                 }
             }
-        }while (ValidLibrarian);
+        }while (!ValidLibrarian);
     }
 
     public void AccessToDatabase() {
@@ -51,6 +51,8 @@ public class Librarian {
             throw new RuntimeException(e);
         }
         new Database();
+//     TODO to show divyansh   Database obj = new Database("Harry Potter","JKR", "BOOK");
+
     }
 
     public static void animation() throws InterruptedException {
@@ -59,6 +61,9 @@ public class Librarian {
             System.out.print(".");
         }
         System.out.println("\n");
+    }
+
+    public static void main(String[] args) {
     }
 
 

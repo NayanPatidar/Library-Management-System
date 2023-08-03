@@ -2,6 +2,7 @@ package UserManagementSystem;
 
 import Database.Database;
 import Librarian.Librarian;
+import User.User;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -13,6 +14,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class UserManagement {
+    private ArrayList<USERNAME_PWD> personList = new ArrayList<>();
+    private String ValidName;
+
     public void AskUserType()  {
         System.out.println("STARTING USER MANAGEMENT SYSTEM ...\n\n");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -77,7 +81,7 @@ public class UserManagement {
     }
 
     private void VerifyUser() {
-        ArrayList<USERNAME_PWD> personList = new ArrayList<>();
+
         Scanner scanner = new Scanner(System.in);
 
         personList.add(new USERNAME_PWD("Nayan", "Hello"));
@@ -138,6 +142,7 @@ public class UserManagement {
         for (USERNAME_PWD val : arrayList){
             if (val.getName().equals(name) && val.getPassword().equals(password)){
                 System.out.println("Present");
+                ValidName = val.getName();
                 UserPresent = true;
             }else{
             System.out.println("ENTER YOUR CREDENTIALS AGAIN !!!");
@@ -155,15 +160,18 @@ public class UserManagement {
             // TODO can be changed
         }
         else if(UserPresent && UserOrLib == "User"){
+            User objOne = new User();
+            try {
+                objOne.Verify(ValidName);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             // TODO call librarian
         }
-}
+    }
 
     public static void main(String[] args) {
         UserManagement obj = new UserManagement();
         obj.AskUserType();
-
     }
-
-
 }
