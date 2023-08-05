@@ -1,236 +1,85 @@
-//user
-
 package User;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-// import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeUnit;
 
 import Account.Accounts;
 import Book.Books;
+import LibraryManagementSystem.USERNAME_PWD;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class User {
-    private ArrayList<UID> Name = new ArrayList<UID>();
-    static int Show_duedt_var=-1;
-    private Accounts user1_acc;
-    private int user_id;
-    private String UserName;
-    private Scanner sc = new Scanner(System.in);
+    private static ArrayList<USERNAME_PWD> userSubArrayList;
+    private String name;
 
-    public User() {
-        // Name array initialization
-        UID us1 = new UID();
-        us1.Name = "Nayan";
-        us1.id = 123;
-        Name.add(us1);
-        UID us = new UID();
-        us.Name = "Divyansh";
-        us.id = 111;
-        Name.add(us);
-
-
-    }
-
-    // verification of user
-    public boolean Verify(String Username) throws InterruptedException{
-        // user1_acc=new Accounts();
-        this.UserName=Username;
-        int  id_begger = 0;
-        boolean uid_verify = true;
-        // Scanner sc = new Scanner(System.in);
-        System.out.println("\nEnter the id of user ");
-        // if user enter wrong id for reattempts
-        while (uid_verify) {
-            if (id_begger >= 1) {
-                int select_option_for_Verify;
-                System.out.println("\n Chosse option :");
-                System.out.println("\n 1. Reenter your ID :");
-                System.out.println("\n 2. Exit ");
-                select_option_for_Verify = sc.nextInt();
-                if (select_option_for_Verify == 2) {
-                    uid_verify = false;
-                    return false;
-                }
-
-            }
-            user_id = sc.nextInt();
-            System.out.println("PLEASE WAIT WE ARE VERIFING YOU....WAIT");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (Exception e) {
-                // TODO: handle exception
-            }
-            for (int i = 0; i < Name.size(); i++) {
-
-                //    System.out.println("user ent : "+Username+"   id: "+user_id);
-                //    System.out.println("user ent : "+Name.get(i).Name+"   id: "+Name.get(i).id);
-                if ((Name.get(i).Name).equalsIgnoreCase(Username) && Name.get(i).id == user_id) {
-                    Show_duedt_var=i;
-                    try {
-                        if(Account.Accounts.indexfinder(Username,user_id,0)==-1){
-                            user1_acc=new Accounts();
-                        }
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                        System.out.println("SOME ERROR IS OCCURED ");
-                    }
-
-                    System.out.println("\nUSER IS VERIFIED ");
-
-                    try {
-                        uid_verify = false;
-                        return true;
-                    } finally {
-                        int option;
-                        boolean looping=true;
-                        while(looping){
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (Exception e) {
-                                // TODO: handle exception
-                            }
-                            System.out.println("\n \n CHOSSE OPTION: ");
-                            System.out.println("1.CHECK YOUR ACCOUNT INFORMATION Check : ");
-                            System.out.println("2.GET BOOK INFORMATION : ");
-                            System.out.println("3.EXIT : ");
-                            option = sc.nextInt();
-                            System.out.println("YOU ENTERED : "+option);
-                            System.out.println("PLEASE WAIT WE ARE PROCESSING YOUR DATA...");
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-
-
-                                if (option == 1) {
-                                    CheckAccount();
-                                } else if (option == 2) {
-                                    get_book_info();
-                                }else if(option==3){
-                                    looping=false;
-
-                                }else{
-
-                                    System.out.println("\n!!!!  ENETER VALID INPUT !!! \n");
-                                }
-                            } catch (Exception e) {
-                                // TODO: handle exception
-                            }
-                        }
-                    }
-
-                }
-            }
-            id_begger += 1;
+    public User(ArrayList<USERNAME_PWD> usersUsernamePwdArrayList, String name) {
+        userSubArrayList = usersUsernamePwdArrayList;
+        this.name = name;
+        System.out.println("YOU ARE IN USER CLASS !!\n");
+                for (USERNAME_PWD val : userSubArrayList){
+            System.out.println(val.getPassword() + " " + val.getUsername() + " " + val.getID());
         }
-        System.out.println("\nUSER IS NOT VERIFIED ");
-        return false;
+        verifyUser();
     }
 
-    // checking account user detail if it's verified
-    private  void CheckAccount() throws InterruptedException {
-        System.out.println("\n\n NOW YOU R IN CHECKACCOUNT ");
-        // System.out.println("ENTER CHOICE : ");
-        //  System.out.println("CALCULATE FINE : ");
-        try {
-            user1_acc.AccountDetails(UserName, user_id);
-        } catch (Exception e) {
-            // TODO: handle exception
+    public User(ArrayList<USERNAME_PWD> bookSubArrayList) {
+        userSubArrayList = bookSubArrayList;
+    }
+
+    private void verifyUser() {
+        int index = indexFinder(name);
+        boolean valid = false;
+        while (!valid) {
+            Scanner scn = new Scanner(System.in);
+            System.out.println("ENTER YOUR ID");
+            String id = scn.nextLine();
+            if (userSubArrayList.get(index).getID().equals(id)){
+                System.out.println("Verified");
+                valid = true;
+            }
         }
-
-
-
-
-    }
-    // private 
-
-    // getting information about book
-    private  void get_book_info() {
-        int option_U;
-
-        System.out.println("\n\n NOW YOU R IN GET_BOOK_INFO ");
-        Books boookinfo=new Books();
-        boolean looping=true;
-        while(looping){
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (Exception e) {
-                // TODO: handle exception
-            }
-            System.out.println(" CHOOSE OPTION : ");
-            System.out.println(" 1. DUE DATE INFORMATION : ");
-            System.out.println(" 2. BOOK REQUEST : ");
-            System.out.println(" 3. RENEW INFORMATION(RENEW YOUR BOOK ) :");
-            System.out.println(" 4. EXIT  : ");
-            option_U=sc.nextInt();
-            System.out.println("YOU ENTERDED : "+option_U);
-            System.out.println("WAIT ....");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-
-                if(option_U==1) {
-                    //  System.out.println(" i am in oprion 1"+(UserName)+"  "+(user_id)+ " "+Account.Accounts.indexfinder(UserName, user_id,1));
-                    //  System.out.println(Account.Accounts.all_data_of_Accounts.get(0).u);
-                    try {
-                        if(Account.Accounts.indexfinder(UserName, user_id,1)!=-1){
-
-                            boookinfo.Show_duedt(Account.Accounts.indexfinder(UserName, user_id,1), user1_acc);
-                        }
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-
-                }else if(option_U==2){
-                    // System.out.println(" i am here \n");
-                    boookinfo.Book_Request(UserName,user_id);
-
-                }else if(option_U==3){
-                    try {
-                        boookinfo.Renw_info(user1_acc);
-                    } catch (Exception e) {
-                        System.out.println("MAY BR DOES NOT HAVE ANY BOOK ");
-                    }
-
-
-                }else if (option_U==4){
-                    System.out.println("\n THANK YOU HAVE A NICE DAY ......\n");
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-                    looping =false;
-                }else{
-                    System.out.println("\n!!!!  ENETER VALID INPUT !!! \n");
-                }
-            }
-            catch (Exception e) {
-                // TODO: handle exception
-            }
-
-
+        if (valid == true){
+            userAccess(index);
         }
     }
+//-------------------------------------------MAIN USER CLASS---------------------------------------------------
 
-    public static void main(String[] args) throws InterruptedException {
-        // User u1 = new User();
-        // System.out.println("afetr \n");
-        User u2 = new User();
+    private void userAccess(int index){
+        Scanner scanner = new Scanner(System.in);
+        boolean valid = false;
+        while (!valid){
+            System.out.println("ENTER '1' TO CHECK ACCOUNT, '2' TO GET BOOK INFORMATION | '3' TO EXIT");
+            int input = scanner.nextInt();
 
-        int VALID=1;
-        Scanner sc1 = new Scanner(System.in);
-        boolean h =true;
-        while(h){
-            System.out.println(u2.Verify("DivyANSH"));
-            System.out.println("\n \n \n NAYan is called ");
-            System.out.println(u2.Verify("NAyan"));
-            System.out.println("Press one for contine \n");
-            VALID=sc1.nextInt();
-            if(VALID!=1){
-                h=false;
+            if (input == 1){
+                // TODO add check-account
+                new Accounts(userSubArrayList, index);
+            }else if (input == 2){
+                // TODO add get book info
+                new Books(userSubArrayList, index);
+            }else if (input == 3){
+                System.out.println("EXITING");
+                valid = true;
             }
 
         }
-        // u1.CheckAccount();;
-        // u1.get_book_info();
+
     }
+
+
+
+
+
+
+
+
+
+//-------------------------------------------- BACKGROUND -----------------------------------------------------
+private int indexFinder(String name) {
+    for (int i = 0; i < userSubArrayList.size(); i++) {
+        USERNAME_PWD val = userSubArrayList.get(i);
+        if (val.getUsername().equalsIgnoreCase(name)) {
+            return i; // Return the index when the username matches
+        }
+    }
+    return -1; // Return -1 if the element is not found
+}
 }
