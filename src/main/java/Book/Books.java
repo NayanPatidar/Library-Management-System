@@ -1,6 +1,7 @@
 package Book;
 
 import Account.Accounts;
+import Database.Database;
 import LibraryManagementSystem.USERNAME_PWD;
 import User.User;
 
@@ -40,7 +41,7 @@ public class Books {
 
                 if (input == 1){
                     // TODO
-//                    requestBook();
+                    CheckBook();
                 }else if (input == 2){
                     // TODO
 //                    show_due-date();
@@ -53,5 +54,30 @@ public class Books {
             }
 
         }
+
+//-----------------------------------------------------Main Book Classes-----------------------------------------------------
+
+
+    private void CheckBook() {
+        Scanner scanner = new Scanner(System.in);
+        boolean valid = false;
+
+
+        while (!valid){
+            boolean repeatValid = false;
+            System.out.println("ENTER TITLE");
+            String title = scanner.nextLine();
+            System.out.println("ENTER AUTHOR");
+            String author = scanner.nextLine();
+            Database obj = new Database(title, author, 1);
+            if (obj.BookPresentOrNot){
+                requestBook();
+                valid = true;
+            }
+        }
+    }
+
+    private void requestBook() {
+    }
 
 }

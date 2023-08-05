@@ -1,5 +1,6 @@
 package LibraryManagementSystem;
 
+import Librarian.Librarian;
 import User.User;
 
 import java.util.ArrayList;
@@ -133,6 +134,7 @@ public class LibraryManagement {
                     if (values.getUsername().equalsIgnoreCase(name) && values.getPassword().equalsIgnoreCase(pwd)){
                         System.out.println("WELCOME");
                         System.out.println(i);
+                        new Librarian(Librarian_username_pwdArrayList, name);
                         valid = true;
                         found = true;
                         break;
