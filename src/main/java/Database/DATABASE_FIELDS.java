@@ -1,67 +1,51 @@
 package Database;
 
-import javax.swing.border.TitledBorder;
-
 public class DATABASE_FIELDS {
-    private String Title;
-
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
-    }
-
-    public void setNumBooks(int numBooks) {
-        this.numBooks = numBooks;
-    }
-
-    public void setAuthor(String author) {
-        Author = author;
-    }
-
-    public void setPublication(String publication) {
-        Publication = publication;
-    }
-
+    private String title;
+    private String author;
     private String ISBN;
     private String Publication;
-    private String Author;
-    private int numBooks;
+    private int numOfBooks;
 
-    DATABASE_FIELDS(String Title, String ISBN, String Publication, String Author, int numBooks){
-        this.Title = Title;
-        this.Author = Author;
-        this.Publication = Publication;
-        this.ISBN = ISBN;
-        this.numBooks = numBooks;
+
+
+    public int getNumOfBooks() {
+        return numOfBooks;
     }
 
-    DATABASE_FIELDS(String Title, String ISBN, String Publication, String Author){
-        this.Title = Title;
-        this.Author = Author;
-        this.Publication = Publication;
-        this.ISBN = ISBN;
-    }
-
-    public String getAuthor() {
-        return Author;
+    public void setNumOfBooks(int numOfBooks) {
+        this.numOfBooks = numOfBooks;
     }
 
     public String getPublication() {
         return Publication;
     }
 
+    public void setPublication(String publication) {
+        Publication = publication;
+    }
+
     public String getISBN() {
         return ISBN;
     }
 
-    public String getTitle() {
-        return Title;
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
     }
 
-    public int getNumBooks() {
-        return numBooks;
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

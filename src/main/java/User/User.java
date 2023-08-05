@@ -3,7 +3,6 @@ package User;
 import Account.Accounts;
 import Book.Books;
 import LibraryManagementSystem.USERNAME_PWD;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +55,7 @@ public class User {
             }else if (input == 2){
                 // TODO add get book info
                 new Books(userSubArrayList, index);
+//                printData();
             }else if (input == 3){
                 System.out.println("EXITING");
                 valid = true;
@@ -82,5 +82,14 @@ private int indexFinder(String name) {
         }
     }
     return -1; // Return -1 if the element is not found
+}
+
+private void printData(){
+    for (USERNAME_PWD values :userSubArrayList) {
+//            System.out.println(bookSubArrayList.get(index).getPassword() + " " + bookSubArrayList.get(index).getUsername()
+//                    + " " + bookSubArrayList.get(index).getID() + " " + bookSubArrayList.get(index).getBookName());
+
+        System.out.println(values.getBookName() + " " + values.getID() + " " + values.getUsername() + " " + values.getPassword());
+    }
 }
 }

@@ -1,386 +1,126 @@
 package Database;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Database {
-    private String title;
-    private String author;
-    private String ISBN;
-    private String Publication;
-    private int numOfBooks;
-    private ArrayList<DATABASE_FIELDS> databaseArrayList= new ArrayList<>();
-    public boolean BookFoundOfNot;
+    private static ArrayList<DATABASE_FIELDS> databaseFieldsArrayList;
 
-    public Database(String title, String author, String nameOfYourClass, int Request){
-        databaseArrayList.add(new DATABASE_FIELDS("To Kill a Mockingbird", "Harper Lee", "9780061120084", "Harper Perennial Modern Classics",4));
-        databaseArrayList.add(new DATABASE_FIELDS("1984", "George Orwell", "9780451524935", "Signet Classics",2));
-        databaseArrayList.add(new DATABASE_FIELDS( "The Great Gatsby","F. Scott Fitzgerald", "9780743273565", "Scribner",3));
-        databaseArrayList.add(new DATABASE_FIELDS( "Harry Potter","123", "12345", "JKR",1));
-        this.title = title;
-        this.author = author;
-        BookOrLibrarian(nameOfYourClass, Request);
-
+    public Database() {
+        // TODO For Librarian Access
     }
 
-    public Database(){
-        databaseArrayList.add(new DATABASE_FIELDS("To Kill a Mockingbird", "Harper Lee", "9780061120084", "Harper Perennial Modern Classics",4));
-        databaseArrayList.add(new DATABASE_FIELDS("1984", "George Orwell", "9780451524935", "Signet Classics",2));
-        databaseArrayList.add(new DATABASE_FIELDS( "The Great Gatsby","F. Scott Fitzgerald", "9780743273565", "Scribner",3));
-        databaseArrayList.add(new DATABASE_FIELDS( "Harry Potter","123", "12345", "JKR",1));
-        LibrarianAccess();
-    }
+//    public Database(String Name, String Author) {
+//
+//    }
+//
+//    public Database(String Name, String Author) {
+//
+//    }
 
-    private void BookOrLibrarian(String bookOrLibrarianorAccount, int request){
-        if (bookOrLibrarianorAccount == "BOOK" && request == 1){
-           // This is for requesting
-            BookAccess();
-        }
-        else if (bookOrLibrarianorAccount == "BOOK" && request == 0) {
-            // This is for searching book
-            try {
-                animation();
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            BookFoundOfNot =
-                    Search(title, author, null , null , "SEARCH");
-        }
-        else if (bookOrLibrarianorAccount == "LIBRARIAN") {
-            LibrarianAccess();
-        }
-        else if (bookOrLibrarianorAccount == "ACCOUNT") {
-            System.out.println("YOU ARE IN ACCOUNT");
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            AccountAccess();
-        }
-        else {
-            System.out.println("ENTER CORRECT CLASS YOU CHOMU !!");
-        }
-    }
+//--------------------------Main Librarian Access-------------------------------
 
-    private void IncreaseNumOfBooks(String title, String author) {
-        System.out.print("ADDING YOUR BOOK ");
-        try {
-            animation();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        for (DATABASE_FIELDS databaseFields : databaseArrayList){
-
-            if (databaseFields.getTitle().equalsIgnoreCase(title) && databaseFields.getAuthor().equalsIgnoreCase(author)){
-
-                System.out.println();
-                System.out.print(databaseFields.getTitle() + " ");
-                System.out.print(databaseFields.getAuthor() + " ");
-                System.out.print(databaseFields.getPublication() + " ");
-                System.out.print(databaseFields.getISBN() + " ");
-                System.out.print(databaseFields.getNumBooks() + " ");
-                System.out.println();
-
-                int currentNumBooks = databaseFields.getNumBooks();
-                databaseFields.setNumBooks(currentNumBooks + 1);
-
-                System.out.println();
-                System.out.print(databaseFields.getTitle() + " ");
-                System.out.print(databaseFields.getAuthor() + " ");
-                System.out.print(databaseFields.getPublication() + " ");
-                System.out.print(databaseFields.getISBN() + " ");
-                System.out.print(databaseFields.getNumBooks() + " ");
-                System.out.println();
-            }
-        }
-    }
-    private void AccountAccess() {
-        System.out.print("RETURNING YOUR BOOK");
-        try {
-            animation();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        boolean BookPresentDB = Search(title, author, null, null, "SEARCH");
-        if (BookPresentDB){
-            IncreaseNumOfBooks(title, author);
-        }
-    }
-
-    private void BookAccess(){
-        System.out.print("SEARCHING YOUR BOOK");
-        try {
-            animation();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        BookFoundOfNot = Search(title, author);
-    }
-
-    private void LibrarianAccess(){
-        int input ;
-        boolean validInput = false;
-        Scanner scn = new Scanner(System.in);
-
-        while( (!validInput)){
-
-            System.out.println("ENTER '1' TO ADD BOOK, '2' TO DELETE BOOK, '3' TO UPDATE," +
-                    " '4' TO DISPLAY, '5' TO SEARCH | '6' TO EXIT");
-            input = scn.nextInt();
-
+    private void librarianAccess(){
+        Scanner scanner = new Scanner(System.in);
+        boolean valid = false;
+        while (!valid){
+            System.out.println("ENTER '1' TO ADD BOOK, '2' TO DELETE BOOK, '3' TO UPDATE BOOK" +
+                    ", '4' DISPLAY, '5' SEARCH | '6' TO EXIT");
+            int input = scanner.nextInt();
             if (input == 1){
-                LibrarianInput();
-                add(title, author, ISBN, Publication);
-                try {
-                    System.out.print("WAIT");
-                    animation();
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                // TODO add book
+                FuncAssigner(1);
             } else if (input == 2) {
-                LibrarianInput();
-                delete(title, author, ISBN, Publication);
-                try {
-                    System.out.print("\nWAIT");
-                    animation();
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }else if (input == 3){
-                LibrarianInput();
-                if (Search(title, author, ISBN, Publication, "UPDATE")) {
-                    update(title, author, ISBN, Publication);
-                }else {
-                    System.out.println("NO SUCH BOOK FOUND");
-                }
-
-                try {
-                    System.out.print("\nWAIT");
-                    animation();
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }else if (input == 4) {
-                display();
-                try {
-                    System.out.print("\nWAIT");
-                    animation();
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }else if (input == 5){
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("ENTER SEARCH TITLE");
-                String SearchTitle = scanner.nextLine();
-                System.out.println("ENTER AUTHOR TO SEARCH");
-                String SearchAuthor = scanner.nextLine();
-                Search(SearchTitle, SearchAuthor, null,null,"SEARCH");
-
-
-                try {
-                    System.out.print("\nWAIT");
-                    animation();
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }else if (input == 6) {
-                validInput = true;
-            }else {
-                System.out.println("WRONG INPUT");
-            }
-
-        }
-        scn.close();
-    }
-
-
-    private void add(String title, String author, String ISBN, String Publication){
-
-        databaseArrayList.add(new DATABASE_FIELDS(title, ISBN, Publication, author, 1));
-        System.out.println("BOOK ADDED !!!");
-    }
-
-    private void delete(String title, String author, String ISBN, String Publication) {
-       // int indexToRemove = findIndexByFields(databaseArrayList, title, author);
-
-        Iterator<DATABASE_FIELDS> iterator = databaseArrayList.iterator();
-        while (iterator.hasNext()) {
-            DATABASE_FIELDS data = iterator.next();
-            if (data.getTitle().equals(title) && data.getAuthor().equals(author)) {
-                if (data.getNumBooks() > 1) {
-                    System.out.println("ONE BOOK DELETED");
-                } else if (data.getNumBooks() == 1) {
-                    iterator.remove(); // Safe way to remove elements during iteration.
-                }
+                // TODO delete book
+            } else if (input == 3) {
+                // TODO update book
+            } else if (input == 4) {
+                // TODO display
+            } else if (input == 5){
+                // TODO search
+            } else if (input == 6) {
+                valid = true;
+                break;
             }
         }
     }
 
-    private void delete(String title, String author) {
-        Iterator<DATABASE_FIELDS> iterator = databaseArrayList.iterator();
-        System.out.println("in delete");
-        while (iterator.hasNext()) {
-            DATABASE_FIELDS data = iterator.next();
-            if (data.getTitle().equals(title) && data.getAuthor().equals(author)) {
-
-                System.out.println();
-                System.out.print(data.getTitle() + " ");
-                System.out.print(data.getAuthor() + " ");
-                System.out.print(data.getPublication() + " ");
-                System.out.print(data.getISBN() + " ");
-                System.out.print(data.getNumBooks() + " ");
-                System.out.println();
-
-
-                if (data.getNumBooks() >= 1) {
-
-                    System.out.println("BOOK IS PRESENT AND HAS BEEN REQUESTED");
-                    int numOfBooks = data.getNumBooks();
-                    data.setNumBooks(numOfBooks-1);
-                    System.out.println();
-                    System.out.print(data.getTitle() + " ");
-                    System.out.print(data.getAuthor() + " ");
-                    System.out.print(data.getPublication() + " ");
-                    System.out.print(data.getISBN() + " ");
-                    System.out.print(data.getNumBooks() + " ");
-                    System.out.println();
-                } else if (data.getNumBooks() == 0) {
-                    System.out.println("SORRY NO SUCH BOOKS ARE LEFT :(");
-                }
-            }
-        }
-    }
-
-
-    private void update(String title, String author, String ISBN, String Publication){
-        int index = findIndexByFields(databaseArrayList, title, author);
-
-        System.out.println("ENTER THE BOOK DETAILS TO BE CHANGED\n");
-        Scanner scn = new Scanner(System.in);
-
+    private void FuncAssigner(int i) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("ENTER TITLE");
-        title = scn.nextLine();
-        databaseArrayList.get(index).setTitle(title);
-
+        String title = scanner.nextLine();
         System.out.println("ENTER AUTHOR");
-        author = scn.nextLine();
-        databaseArrayList.get(index).setAuthor(author);
-
+        String author = scanner.nextLine();
         System.out.println("ENTER ISBN");
-        ISBN = scn.nextLine();
-        databaseArrayList.get(index).setISBN(ISBN);
-
+        String isbn = scanner.nextLine();
         System.out.println("ENTER PUBLICATION");
-        Publication = scn.nextLine();
-        databaseArrayList.get(index).setPublication(Publication);
+        String publication = scanner.nextLine();
 
-        System.out.println("CHANGES UPDATED !!!");
-    }
-
-    private void display(){
-        for (DATABASE_FIELDS val : databaseArrayList){
-            System.out.print(val.getTitle() + " ");
-            System.out.print(val.getAuthor() + " ");
-            System.out.print(val.getPublication() + " ");
-            System.out.print(val.getISBN() + " ");
-            System.out.print(val.getNumBooks() + " ");
-            System.out.println();
+        if (i == 1){
+            // TODO add book
+            search(title, author, isbn, publication);
+            add(title, author, isbn, publication);
+        } else if (i == 2) {
+            // TODO delete book
+            delete(title, author, isbn, publication);
+        } else if (i == 3) {
+            // TODO update book
+            search(title, author, isbn, publication);
+            update(title, author, isbn, publication);
+        } else if (i == 4) {
+            // TODO display
+            display();
+        } else if (i == 5){
+            // TODO search
+            search(title, author);
         }
     }
-    private boolean Search(String title, String author, String ISBN, String Publication, String REASON){
-        //TODO keep it on check
-        if (REASON == "UPDATE") {
-            for (DATABASE_FIELDS val : databaseArrayList) {
-                if (val.getTitle().equalsIgnoreCase(title) && val.getAuthor().equalsIgnoreCase(author)) {
-                    System.out.println("BOOK IS PRESENT");
-                    return true;
-                }
-            }
-        } else if (REASON == "SEARCH") {
-            for (DATABASE_FIELDS val : databaseArrayList) {
-                if (val.getTitle().equalsIgnoreCase(title) && val.getAuthor().equalsIgnoreCase(author)) {
-                    System.out.println("BOOK IS PRESENT");
-                    return true;
-                }
-            }
-        }
-        System.out.println("BOOK IS NOT FOUND");
-        return false;
+
+
+//-----------------------------Book Access---------------------------------------
+
+//-----------------------------Account Access------------------------------------
+
+//-----------------------------Database Access-----------------------------------
+    private void add(String title, String author, String isbn, String publication) {
+        // TODO add method
     }
 
-    private boolean Search(String title, String author){
-        //TODO keep it on check
-        for (DATABASE_FIELDS val : databaseArrayList){
-            if (val.getTitle().equalsIgnoreCase(title) && val.getAuthor().equalsIgnoreCase(author)){
-//                System.out.println("BOOK IS PRESENT AND HAS BEEN REQUESTED");
-                System.out.println("deleting");
-                delete(title, author);
+    private void delete(String title, String author, String isbn, String publication) {
+        // TODO add delete method
+    }
+
+    private void update(String title, String author, String isbn, String publication) {
+        // TODO add update method
+    }
+
+    private void display() {
+        // TODO add display method
+    }
+
+    private boolean search(String title, String author) {
+        // TODO add search method
+        for (DATABASE_FIELDS values : databaseFieldsArrayList){
+            if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author)){
+                System.out.println("YAY!! BOOK FOUND");
                 return true;
             }
         }
-        System.out.println("BOOK IS NOT FOUND !!!");
         return false;
     }
 
-    private void animation() throws InterruptedException {
-        for (int i = 0; i < 3; i++){
-            TimeUnit.SECONDS.sleep(1);
-            System.out.print(".");
-        }
-        System.out.println();
-    }
-
-    private void LibrarianInput(){
-        boolean valid = false;
-        do {
-            try {
-                Scanner scn = new Scanner(System.in);
-                System.out.println("ENTER TITLE");
-                 title = scn.nextLine();
-
-                System.out.println("ENTER AUTHOR");
-                 author = scn.nextLine();
-
-                System.out.println("ENTER ISBN");
-                 ISBN = scn.nextLine();
-
-                System.out.println("ENTER PUBLICATION");
-                 Publication = scn.nextLine();
-                valid = true;
-            }catch (InputMismatchException e){
-                System.out.println("WRONG INPUT");
-            }
-        }while (!valid);
-    }
-
-    private int findIndexByFields(ArrayList<DATABASE_FIELDS> books, String title, String author) {
-        for (int i = 0; i < books.size(); i++) {
-            DATABASE_FIELDS book = books.get(i);
-            if (book.getTitle().equalsIgnoreCase(title) && book.getAuthor().equalsIgnoreCase(author)) {
-                return i; // Match found, return the index
+    private boolean search(String title, String author, String isbn, String publication) {
+        // TODO add search method
+        for (DATABASE_FIELDS values : databaseFieldsArrayList){
+            if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author) &&
+                values.getISBN().equalsIgnoreCase(isbn) && values.getPublication().equalsIgnoreCase(publication)){
+                System.out.println("YAY!! BOOK FOUND");
+                return true;
             }
         }
-        return -1; // Match not found, return -1
-    }
-
-    public static void main(String[] args) {
-        //"Harry Potter","123", "12345", "JKR",5
-        Database obj = new Database("Harry Potter","JKR", "BOOK", 1);
-//        System.out.println(obj.BookFoundOfNot);
-//        Database obj = new Database("Harry Potter", "JKR", );
-
+        return false;
     }
 }
+
+
+//--------------------------------BACKGROUND-------------------------------------
