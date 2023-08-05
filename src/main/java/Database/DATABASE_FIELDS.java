@@ -7,7 +7,13 @@ public class DATABASE_FIELDS {
     private String Publication;
     private int numOfBooks;
 
-
+    public DATABASE_FIELDS(String title, String author, String ISBN, String Publication, int numOfBooks){
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
+        this.Publication = Publication;
+        this.numOfBooks = numOfBooks;
+    }
 
     public int getNumOfBooks() {
         return numOfBooks;
