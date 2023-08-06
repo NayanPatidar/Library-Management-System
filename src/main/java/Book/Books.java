@@ -51,7 +51,7 @@ public class Books {
                     show_dueDate(index);
                 }else if (input == 3){
                     // TODO
-//                    renew_book(index);
+                    renew_book(index);
                 }else if (input == 4){
                     valid = true;
                 }
@@ -119,12 +119,24 @@ public class Books {
         }
     }
 
-//    private void renew_book(int index) {
-//        LocalDate currentDate = LocalDate.now();
-//        if (currentDate.equals(bookSubArrayList.get(index).getBookDate())){
-//
-//        }
-//    }
+    private void renew_book(int index) {
+        LocalDate currentDate = LocalDate.now();
+
+        if (bookSubArrayList.get(index).getNumOfBooks() > 0) {
+
+            if (currentDate.equals(bookSubArrayList.get(index).getBookDate())) {
+                System.out.println("RENEWING BOOK");
+                LocalDate DueBookDate = bookSubArrayList.get(index).getBookDate();
+                bookSubArrayList.get(index).setBookDate(DueBookDate.plusDays(7));
+            }
+            else if (!currentDate.equals(bookSubArrayList.get(index).getBookDate())) {
+                System.out.println("BOOK CAN ONLY BE RENEWED ON: " + bookSubArrayList.get(index).getBookDate() + "\n");
+            }
+        }
+        else if (bookSubArrayList.get(index).getNumOfBooks() == 0){
+            System.out.println("YOU HAVE NO BOOKS ASSIGNED !\n");
+        }
+    }
 
 
 
