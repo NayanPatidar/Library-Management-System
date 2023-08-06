@@ -76,6 +76,7 @@ public class Books {
             Database obj = new Database(title, author, 1);
             if (obj.BookPresentOrNot){
                 boolean requestNum = false;
+
                 while (!requestNum){
                 System.out.println("BOOK HAS BEEN FOUND. SHOULD WE REQUEST IT FOR YOU!! \n" +
                                     " '1' FOR YES | '2' FOR NO");
@@ -105,7 +106,21 @@ public class Books {
     private void requestBook(String title, String author, int index) {
         new Database(title, author, 2);
         System.out.println("BOOK HAS BEEN REQUESTED !! \n");
+
+        // Setting numOfBooks to 1 for own reference
         bookSubArrayList.get(index).setNumOfBooks(1);
+
+        // Increasing borrowed books
+        int borrowedBooks = bookSubArrayList.get(index).getBorrowedBooks();
+        bookSubArrayList.get(index).setBorrowedBooks(borrowedBooks+1);
+
+        // Setting title
+        bookSubArrayList.get(index).setBookName(title);
+
+        // Setting author
+        bookSubArrayList.get(index).setAuthorName(author);
+
+        // adding due date
         LocalDate currentDate = LocalDate.now();
         bookSubArrayList.get(index).setBookDate(currentDate.plusDays(7));
     }
@@ -145,10 +160,11 @@ public class Books {
     private void BookNotFound(int index){
         Scanner scn = new Scanner(System.in);
         boolean valid = false;
-        System.out.println("ENTER '1' TO RE-ENTER THE DETAILS | '2' TO EXIT");
-        int input = scn.nextInt();
 
         while (!valid) {
+
+            System.out.println("ENTER '1' TO RE-ENTER THE DETAILS | '2' TO EXIT");
+            int input = scn.nextInt();
             if (input == 1) {
                 CheckBook(index);
                 valid = true;

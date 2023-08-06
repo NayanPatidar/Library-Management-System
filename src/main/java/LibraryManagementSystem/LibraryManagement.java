@@ -1,5 +1,6 @@
 package LibraryManagementSystem;
 
+import Database.Database;
 import Librarian.Librarian;
 import User.User;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class LibraryManagement {
 //        for (USERNAME_PWD val : username_pwdArrayList){
 //            System.out.println(val.getPassword() + " " + val.getUsername());
 //        }
+        new Database("Hello");
         userType();
     }
 
@@ -30,22 +32,21 @@ public class LibraryManagement {
         // TODO add starting line
         Scanner scn = new Scanner(System.in);
         boolean Valid = false;
-        while (!Valid){
-        System.out.println("ENTER '1' IF YOU ARE USER AND '2' IF YOU ARE LIBRARIAN | '3' TO BREAK ");
-        int input = scn.nextInt();
 
-        if (input == 1){
-            UserLoginOrRegister();
+             while (!Valid) {
+                 System.out.println("ENTER '1' IF YOU ARE USER AND '2' IF YOU ARE LIBRARIAN | '3' TO BREAK ");
+                 int input = scn.nextInt();
 
-        } else if (input ==2) {
-            login(2);
-        }else if(input==3){
-            Valid = true;
-            break;
-        }else {
-            System.out.println("WRONG INPUT\n");
-        }
-        }
+                 if (input == 1) {
+                     UserLoginOrRegister();
+                 } else if (input == 2) {
+                     login(2);
+                 } else if (input == 3) {
+                     Valid = true;
+                 } else {
+                     System.out.println("WRONG INPUT\n");
+                 }
+             }
         scn.close();
     }
 
@@ -53,6 +54,7 @@ public class LibraryManagement {
         Scanner scn = new Scanner(System.in);
         System.out.println("ENTER '1' IF YOU WANT TO LOGIN AND '2' IF YOU NEW USER");
         int input = scn.nextInt();
+
         if (input == 1){
             login(1);
         }
@@ -72,12 +74,12 @@ public class LibraryManagement {
         System.out.println("YOUR ID IS name@id");
         String id = name+"@"+pwd;
 
-        if (search(name, pwd) == false) {
+        if (!search(name, pwd)) {
             Users_username_pwdArrayList.add(new UserData(name, pwd, id, 0));
             System.out.println("YOUR NAME IS " + name + " AND YOUR PASSWORD IS " + pwd);
             login(1);
             // TODO Call user
-        }else if (search(name,pwd) == true){
+        }else if (search(name, pwd)){
             System.out.println("ALREADY PRESENT !!");
             System.out.println("MOVING YOU TO LOGIN PAGE...");
             login(1);
