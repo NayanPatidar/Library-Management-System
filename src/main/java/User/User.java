@@ -20,8 +20,8 @@ public class User {
         verifyUser();
     }
 
-    public User(ArrayList<UserData> bookSubArrayList) {
-        userSubArrayList = bookSubArrayList;
+    public User(ArrayList<UserData> book_accountSubArrayList) {
+        userSubArrayList = book_accountSubArrayList;
     }
 
     private void verifyUser() {
