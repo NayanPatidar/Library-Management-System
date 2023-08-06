@@ -22,6 +22,7 @@ public class User {
 
     public User(ArrayList<UserData> book_accountSubArrayList) {
         userSubArrayList = book_accountSubArrayList;
+
     }
 
     private void verifyUser() {

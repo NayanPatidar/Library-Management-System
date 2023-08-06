@@ -8,7 +8,63 @@ public class UserData {
     private String bookName;
     private String ID;
     private int numOfBooks;
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
     private LocalDate BookDate;
+    private int borrowedBooks;
+    private int reservedBooks;
+    private String authorName;
+
+    public long getFineAmount() {
+        return fineAmount;
+    }
+
+    public void setFineAmount(long fineAmount) {
+        this.fineAmount = fineAmount;
+    }
+
+    public int getLostBooks() {
+        return lostBooks;
+    }
+
+    public void setLostBooks(int lostBooks) {
+        this.lostBooks = lostBooks;
+    }
+
+    public int getReturnedBooks() {
+        return returnedBooks;
+    }
+
+    public void setReturnedBooks(int returnedBooks) {
+        this.returnedBooks = returnedBooks;
+    }
+
+    public int getReservedBooks() {
+        return reservedBooks;
+    }
+
+    public void setReservedBooks(int reservedBooks) {
+        this.reservedBooks = reservedBooks;
+    }
+
+    public int getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public void setBorrowedBooks(int borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
+    private int returnedBooks;
+    private int lostBooks;
+    private long fineAmount;
 
     public LocalDate getBookDate() {
         return BookDate;
