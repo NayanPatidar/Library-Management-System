@@ -1,10 +1,36 @@
 package LibraryManagementSystem;
 
-public class USERNAME_PWD {
+import java.time.LocalDate;
+
+public class UserData {
     private String username;
     private String password;
     private String bookName;
     private String ID;
+    private int numOfBooks;
+    private LocalDate BookDate;
+
+    public LocalDate getBookDate() {
+        return BookDate;
+    }
+
+    public void setBookDate(LocalDate bookDate) {
+        BookDate = bookDate;
+    }
+
+    public UserData(String username, String password, String id) {
+        this.username = username;
+        this.password = password;
+        this.ID = id;
+    }
+
+    public int getNumOfBooks() {
+        return numOfBooks;
+    }
+
+    public void setNumOfBooks(int numOfBooks) {
+        this.numOfBooks = numOfBooks;
+    }
 
     public String getID() {
         return ID;
@@ -24,13 +50,14 @@ public class USERNAME_PWD {
 
 
 
-    public USERNAME_PWD(String username, String password, String id){
+    public UserData(String username, String password, String id, int numOfBooks){
         this.username = username;
         this.password = password;
         this.ID = id;
+        this.numOfBooks = numOfBooks;
     }
 
-    public USERNAME_PWD(String bookName){
+    public UserData(String bookName){
         this.bookName = bookName;
     }
 

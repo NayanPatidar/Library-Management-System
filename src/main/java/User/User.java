@@ -2,25 +2,25 @@ package User;
 
 import Account.Accounts;
 import Book.Books;
-import LibraryManagementSystem.USERNAME_PWD;
+import LibraryManagementSystem.UserData;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
-    private static ArrayList<USERNAME_PWD> userSubArrayList;
+    private static ArrayList<UserData> userSubArrayList;
     private String name;
 
-    public User(ArrayList<USERNAME_PWD> usersUsernamePwdArrayList, String name) {
+    public User(ArrayList<UserData> usersUsernamePwdArrayList, String name) {
         userSubArrayList = usersUsernamePwdArrayList;
         this.name = name;
         System.out.println("YOU ARE IN USER CLASS !!\n");
-                for (USERNAME_PWD val : userSubArrayList){
+                for (UserData val : userSubArrayList){
             System.out.println(val.getPassword() + " " + val.getUsername() + " " + val.getID());
         }
         verifyUser();
     }
 
-    public User(ArrayList<USERNAME_PWD> bookSubArrayList) {
+    public User(ArrayList<UserData> bookSubArrayList) {
         userSubArrayList = bookSubArrayList;
     }
 
@@ -32,7 +32,7 @@ public class User {
             System.out.println("ENTER YOUR ID");
             String id = scn.nextLine();
             if (userSubArrayList.get(index).getID().equals(id)){
-                System.out.println("Verified");
+                System.out.println("Verified\n");
                 valid = true;
             }
         }
@@ -74,22 +74,22 @@ public class User {
 
 
 //-------------------------------------------- BACKGROUND -----------------------------------------------------
-private int indexFinder(String name) {
-    for (int i = 0; i < userSubArrayList.size(); i++) {
-        USERNAME_PWD val = userSubArrayList.get(i);
-        if (val.getUsername().equalsIgnoreCase(name)) {
-            return i; // Return the index when the username matches
-        }
+    private int indexFinder(String name) {
+         for (int i = 0; i < userSubArrayList.size(); i++) {
+             UserData val = userSubArrayList.get(i);
+                  if (val.getUsername().equalsIgnoreCase(name)) {
+                      return i; // Return the index when the username matches
+                  }
+         }
+         return -1; // Return -1 if the element is not found
     }
-    return -1; // Return -1 if the element is not found
-}
 
-private void printData(){
-    for (USERNAME_PWD values :userSubArrayList) {
+    private void printData(){
+        for (UserData values :userSubArrayList) {
 //            System.out.println(bookSubArrayList.get(index).getPassword() + " " + bookSubArrayList.get(index).getUsername()
 //                    + " " + bookSubArrayList.get(index).getID() + " " + bookSubArrayList.get(index).getBookName());
 
         System.out.println(values.getBookName() + " " + values.getID() + " " + values.getUsername() + " " + values.getPassword());
+        }
     }
-}
 }
