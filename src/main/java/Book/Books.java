@@ -1,17 +1,17 @@
 package Book;
 
-import Account.Accounts;
 import Database.Database;
-import LibraryManagementSystem.USERNAME_PWD;
+import LibraryManagementSystem.UserData;
 import User.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Books {
-    private static ArrayList<USERNAME_PWD> bookSubArrayList;
+    private static ArrayList<UserData> bookSubArrayList;
 
-    public Books(ArrayList<USERNAME_PWD> userSubArrayList, int index) {
+    public Books(ArrayList<UserData> userSubArrayList, int index) {
         bookSubArrayList = userSubArrayList;
 
 //        if (index == 0) {
@@ -41,13 +41,17 @@ public class Books {
 
                 if (input == 1){
                     // TODO
-                    CheckBook();
+                    if (validNumOfRequest(index)) {
+                        CheckBook(index);
+                    }else {
+                        System.out.println("YOU CANNOT MAKE MORE THAN ONE REQUEST !!! \n");
+                    }
                 }else if (input == 2){
                     // TODO
-//                    show_due-date();
+                    show_dueDate(index);
                 }else if (input == 3){
                     // TODO
-//                    renew_book();
+//                    renew_book(index);
                 }else if (input == 4){
                     valid = true;
                 }
@@ -58,26 +62,93 @@ public class Books {
 //-----------------------------------------------------Main Book Classes-----------------------------------------------------
 
 
-    private void CheckBook() {
+    private void CheckBook(int index) {
         Scanner scanner = new Scanner(System.in);
         boolean valid = false;
 
 
         while (!valid){
-            boolean repeatValid = false;
+            boolean nameFound = false;
             System.out.println("ENTER TITLE");
             String title = scanner.nextLine();
             System.out.println("ENTER AUTHOR");
             String author = scanner.nextLine();
             Database obj = new Database(title, author, 1);
             if (obj.BookPresentOrNot){
-                requestBook();
+                boolean requestNum = false;
+                while (!requestNum){
+                System.out.println("BOOK HAS BEEN FOUND. SHOULD WE REQUEST IT FOR YOU!! \n" +
+                                    " '1' FOR YES | '2' FOR NO");
+                int input = scanner.nextInt();
+                     if (input == 1) {
+                         requestBook(title, author, index);
+                         valid = true;
+                         nameFound = true;
+                         requestNum = true;
+                    } else if (input == 2) {
+                         valid = true;
+                         nameFound = true;
+                         requestNum = true;
+                     }else {
+                         System.out.println("WRONG INPUT\n");
+                     }
+                }
+            }
+            if (!nameFound){
+                BookNotFound(index);
+                System.out.println("OUT OF CHECK BOOK");
                 valid = true;
             }
         }
     }
 
-    private void requestBook() {
+    private void requestBook(String title, String author, int index) {
+        new Database(title, author, 2);
+        System.out.println("BOOK HAS BEEN REQUESTED !! \n");
+        bookSubArrayList.get(index).setNumOfBooks(1);
+        LocalDate currentDate = LocalDate.now();
+        bookSubArrayList.get(index).setBookDate(currentDate.plusDays(7));
     }
 
+    private void show_dueDate(int index) {
+        if (bookSubArrayList.get(index).getNumOfBooks() > 0) {
+            System.out.println(bookSubArrayList.get(index).getBookDate());
+            System.out.println();
+        }else if (bookSubArrayList.get(index).getNumOfBooks() == 0){
+            System.out.println("YOU HAVE NO BOOKS ASSIGNED !\n");
+        }
+    }
+
+//    private void renew_book(int index) {
+//        LocalDate currentDate = LocalDate.now();
+//        if (currentDate.equals(bookSubArrayList.get(index).getBookDate())){
+//
+//        }
+//    }
+
+
+
+//-----------------------------------------------------BACKGROUND-----------------------------------------------------
+
+    private void BookNotFound(int index){
+        Scanner scn = new Scanner(System.in);
+        boolean valid = false;
+        System.out.println("ENTER '1' TO RE-ENTER THE DETAILS | '2' TO EXIT");
+        int input = scn.nextInt();
+
+        while (!valid) {
+            if (input == 1) {
+                CheckBook(index);
+                valid = true;
+            } else if (input == 2) {
+                valid = true;
+            } else{
+                System.out.println("WRONG INPUT!!!\n");
+            }
+        }
+    }
+
+    private boolean validNumOfRequest(int index){
+        return bookSubArrayList.get(index).getNumOfBooks() == 0;
+    }
 }

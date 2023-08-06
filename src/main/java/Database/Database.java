@@ -183,14 +183,14 @@ public class Database {
 
             } else if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) &&
                     (element.getNumOfBooks() > 0)) {
-                System.out.println("DELETING BOOK\n");
+//                System.out.println("DELETING BOOK\n");
                 int num = element.getNumOfBooks();
                 element.setNumOfBooks(num - 1);
 
             } else if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) &&
                     element.getISBN().equalsIgnoreCase(isbn) && element.getPublication().equalsIgnoreCase(publication) &&
                     (element.getNumOfBooks() == 0)) {
-                System.out.println("CANNOT DELETE BOOK !!!");
+                System.out.println("CANNOT DELETE BOOK !!!\n");
             }else {
                 System.out.println("BOOK NOT FOUND TO BE DELETED !!");
             }
@@ -227,9 +227,9 @@ public class Database {
         if (val == 1){
             for (DATABASE_FIELDS values : databaseFieldsArrayList){
                 if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author) ){
-                    System.out.println("YAY!! BOOK RECORD FOUND");
+                    System.out.println("YAY!! BOOK RECORD FOUND\n");
                     if (values.getNumOfBooks() == 0 ){
-                        System.out.println("NO BOOKS LEFT");
+                        System.out.println("NO BOOKS LEFT\n");
                     }
                     return false;
                 }
@@ -238,7 +238,7 @@ public class Database {
             // TODO add search method
             System.out.println("SEARCHING BOOK");
             for (DATABASE_FIELDS values : databaseFieldsArrayList) {
-                if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author)) {
+                if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author) && (values.getNumOfBooks() > 0)) {
                     System.out.println("YAY!! BOOK FOUND\n");
                     return true;
                 }

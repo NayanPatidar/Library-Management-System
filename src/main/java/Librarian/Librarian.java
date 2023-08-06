@@ -1,15 +1,15 @@
 package Librarian;
 
 import Database.Database;
-import LibraryManagementSystem.USERNAME_PWD;
+import LibraryManagementSystem.UserData;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Librarian {
-    private static ArrayList<USERNAME_PWD> librarianArrayList;
+    private static ArrayList<UserData> librarianArrayList;
 
-    public Librarian(ArrayList<USERNAME_PWD> Librarian_username_pwdArrayList, String name){
+    public Librarian(ArrayList<UserData> Librarian_username_pwdArrayList, String name){
         librarianArrayList = Librarian_username_pwdArrayList;
         verification(name);
     }
@@ -22,7 +22,7 @@ public class Librarian {
             System.out.println("ENTER YOUR ID");
             String id = scn.nextLine();
             if (librarianArrayList.get(index).getID().equals(id)){
-                System.out.println("Verified");
+                System.out.println("Verified\n");
                 valid = true;
             }
         }
@@ -41,7 +41,7 @@ public class Librarian {
 //------------------------------------ BACKGROUND ---------------------------------
 private int indexFinder(String name) {
     for (int i = 0; i < librarianArrayList.size(); i++) {
-        USERNAME_PWD val = librarianArrayList.get(i);
+        UserData val = librarianArrayList.get(i);
         if (val.getUsername().equalsIgnoreCase(name)) {
             return i; // Return the index when the username matches
         }
@@ -50,7 +50,7 @@ private int indexFinder(String name) {
 }
 
     private void printData(){
-        for (USERNAME_PWD values :librarianArrayList) {
+        for (UserData values :librarianArrayList) {
 //            System.out.println(bookSubArrayList.get(index).getPassword() + " " + bookSubArrayList.get(index).getUsername()
 //                    + " " + bookSubArrayList.get(index).getID() + " " + bookSubArrayList.get(index).getBookName());
 

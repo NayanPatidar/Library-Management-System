@@ -1,16 +1,16 @@
 package Account;
 
 
-import LibraryManagementSystem.USERNAME_PWD;
+import LibraryManagementSystem.UserData;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Accounts {
     private int index;
-    private static ArrayList<USERNAME_PWD> accountArrayList;
+    private static ArrayList<UserData> accountArrayList;
 
-    public Accounts(ArrayList<USERNAME_PWD> userSubArrayList, int index) {
+    public Accounts(ArrayList<UserData> userSubArrayList, int index) {
         accountArrayList = userSubArrayList;
         this.index = index;
     }
