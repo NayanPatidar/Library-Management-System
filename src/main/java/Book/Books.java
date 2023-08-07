@@ -40,17 +40,14 @@ public class Books {
                 int input = scanner.nextInt();
 
                 if (input == 1){
-                    // TODO
                     if (validNumOfRequest(index)) {
                         CheckBook(index);
                     }else {
                         System.out.println("YOU CANNOT MAKE MORE THAN ONE REQUEST !!! \n");
                     }
                 }else if (input == 2){
-                    // TODO
                     show_dueDate(index);
                 }else if (input == 3){
-                    // TODO
                     renew_book(index);
                 }else if (input == 4){
                     valid = true;

@@ -9,7 +9,6 @@ public class Database {
     public boolean BookPresentOrNot;
 
     public Database() {
-        // TODO For Librarian Access
         librarianAccess();
     }
 
@@ -31,23 +30,17 @@ public class Database {
                     ", '4' DISPLAY, '5' SEARCH | '6' TO EXIT");
             int input = scanner.nextInt();
             if (input == 1) {
-                // TODO add book
                 FuncAssigner(1);
             } else if (input == 2) {
-                // TODO delete book
                 FuncAssigner(2);
             } else if (input == 3) {
-                // TODO update book
                 FuncAssigner(3);
             } else if (input == 4) {
-                // TODO display
                 FuncAssigner(4);
             } else if (input == 5) {
-                // TODO search
                 FuncAssigner(5);
             } else if (input == 6) {
                 valid = true;
-                break;
             }
         }
     }
@@ -101,7 +94,6 @@ public class Database {
             String isbn = scanner.nextLine();
             System.out.println("ENTER PUBLICATION");
             String publication = scanner.nextLine();
-            // TODO update book
 
 
             if (search(title, author, isbn, publication)) {
@@ -121,7 +113,6 @@ public class Database {
                 System.out.println();
             }
         } else if (i == 4) {
-            // TODO display
             display();
         } else if (i == 5) {
             Scanner scanner = new Scanner(System.in);
@@ -129,7 +120,6 @@ public class Database {
             String title = scanner.nextLine();
             System.out.println("ENTER AUTHOR");
             String author = scanner.nextLine();
-            // TODO search
 
             search(title, author, 1);
         }
@@ -164,7 +154,6 @@ public class Database {
 
     //-----------------------------Database Access-----------------------------------
     private void add(String title, String author, String isbn, String publication) {
-        // TODO add method
         databaseFieldsArrayList.add(new DATABASE_FIELDS(title, author, isbn, publication, 1));
         System.out.println("ADDED\n");
     }
@@ -179,33 +168,32 @@ public class Database {
                 added = true;
             }
         }
-        if (added == false){
+        if (!added){
             System.out.println("BOOK NOT FOUND");
         }
     }
 
     private void delete(String title, String author, String isbn, String publication) {
-        boolean valid = false;
-        // TODO add delete method
-        for (DATABASE_FIELDS element : databaseFieldsArrayList) {
-            System.out.println(element.getTitle() + " " + element.getAuthor() + " " + element.getNumOfBooks());
-            if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) &&
-                    element.getISBN().equalsIgnoreCase(isbn) && element.getPublication().equalsIgnoreCase(publication) &&
-                    (element.getNumOfBooks() > 0)) {
-                System.out.println("DELETING BOOK\n");
-                int num = element.getNumOfBooks();
-                element.setNumOfBooks(num - 1);
-                valid = true;
-                break;
+                    boolean valid = false;
+                    for (DATABASE_FIELDS element : databaseFieldsArrayList) {
+//            System.out.println(element.getTitle() + " " + element.getAuthor() + " " + element.getNumOfBooks());
+                        if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) &&
+                                element.getISBN().equalsIgnoreCase(isbn) && element.getPublication().equalsIgnoreCase(publication) &&
+                                (element.getNumOfBooks() > 0)) {
+                            System.out.println("DELETING BOOK\n");
+                            int num = element.getNumOfBooks();
+                            element.setNumOfBooks(num - 1);
+                            valid = true;
+                            break;
 
-            } else if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) && (element.getNumOfBooks() > 0)) {
-                System.out.println("DELETING BOOK\n");
-                int num = element.getNumOfBooks();
-                element.setNumOfBooks(num - 1);
-                valid = true;
-                break;
+                        } else if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) && (element.getNumOfBooks() > 0)) {
+                            System.out.println("DELETING BOOK\n");
+                            int num = element.getNumOfBooks();
+                            element.setNumOfBooks(num - 1);
+                            valid = true;
+                            break;
 
-            } else if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) &&
+                        } else if (element.getTitle().equalsIgnoreCase(title) && element.getAuthor().equalsIgnoreCase(author) &&
                     element.getISBN().equalsIgnoreCase(isbn) && element.getPublication().equalsIgnoreCase(publication) &&
                     (element.getNumOfBooks() == 0)) {
                 System.out.println("CANNOT DELETE BOOK !!!\n");
@@ -219,7 +207,6 @@ public class Database {
     }
 
     private void update(String title, String author, String isbn, String publication, String oldTitle) {
-        // TODO add update method
         for (DATABASE_FIELDS values : databaseFieldsArrayList) {
             if (values.getTitle().equalsIgnoreCase(oldTitle)) {
                 values.setTitle(title);
@@ -231,7 +218,6 @@ public class Database {
     }
 
     private void display() {
-        // TODO add display method
 
         if (databaseFieldsArrayList.isEmpty()) {
             System.out.println("NOTHING TO DISPLAY\n");
@@ -256,7 +242,6 @@ public class Database {
                 }
             }
         } else if (val == 2) {
-            // TODO add search method
             System.out.println("SEARCHING BOOK");
             for (DATABASE_FIELDS values : databaseFieldsArrayList) {
                 if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author) && (values.getNumOfBooks() > 0)) {
@@ -278,7 +263,6 @@ public class Database {
     }
 
     private boolean search(String title, String author, String isbn, String publication) {
-        // TODO add search method
         for (DATABASE_FIELDS values : databaseFieldsArrayList) {
             if (values.getTitle().equalsIgnoreCase(title) && values.getAuthor().equalsIgnoreCase(author) &&
                     values.getISBN().equalsIgnoreCase(isbn) && values.getPublication().equalsIgnoreCase(publication)) {
@@ -289,10 +273,6 @@ public class Database {
         return false;
     }
 
-    public static void main(String[] args) {
-        Database obj = new Database();
-    }
-
 
 //--------------------------------BACKGROUND-------------------------------------
     public Database(String addingBooks){
@@ -300,7 +280,6 @@ public class Database {
         databaseFieldsArrayList.add(new DATABASE_FIELDS("RDPD", "Robert", "2", "2", 2));
         databaseFieldsArrayList.add(new DATABASE_FIELDS("Atomic Habits", "James Clear", "3", "3", 3));
         databaseFieldsArrayList.add(new DATABASE_FIELDS("Percy Jackson", "RR", "4", "4", 4));
-
     }
 
 }

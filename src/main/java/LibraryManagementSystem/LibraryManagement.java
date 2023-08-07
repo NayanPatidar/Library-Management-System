@@ -29,7 +29,6 @@ public class LibraryManagement {
 
 // ---------------------------------------------STARTING---------------------------------------------------
     public void userType() {
-        // TODO add starting line
         Scanner scn = new Scanner(System.in);
         boolean Valid = false;
 
@@ -71,14 +70,13 @@ public class LibraryManagement {
         String name = scn.nextLine();
         System.out.println("ENTER YOUR PASSWORD");
         String pwd = scn.nextLine();
-        System.out.println("YOUR ID IS name@id");
+        System.out.println("YOUR ID IS name@pwd\n");
         String id = name+"@"+pwd;
 
         if (!search(name, pwd)) {
             Users_username_pwdArrayList.add(new UserData(name, pwd, id, 0));
-            System.out.println("YOUR NAME IS " + name + " AND YOUR PASSWORD IS " + pwd);
+//            System.out.println("YOUR NAME IS " + name + " AND YOUR PASSWORD IS " + pwd);
             login(1);
-            // TODO Call user
         }else if (search(name, pwd)){
             System.out.println("ALREADY PRESENT !!");
             System.out.println("MOVING YOU TO LOGIN PAGE...");
@@ -102,9 +100,8 @@ public class LibraryManagement {
 
                   for (UserData values : Users_username_pwdArrayList){
                     if (values.getUsername().equalsIgnoreCase(name) && values.getPassword().equalsIgnoreCase(pwd)){
-                         System.out.println("\nWELCOME");
-                         System.out.println(i);
-                         // TODO CALL User;
+//                         System.out.println("\nWELCOME");
+//                         System.out.println(i);
                          new User(Users_username_pwdArrayList, name);
                          valid = true;
                          found = true;
@@ -132,8 +129,8 @@ public class LibraryManagement {
 
                 for (UserData values : Librarian_username_pwdArrayList){
                     if (values.getUsername().equalsIgnoreCase(name) && values.getPassword().equalsIgnoreCase(pwd)){
-                        System.out.println("WELCOME");
-                        System.out.println(i);
+//                        System.out.println("WELCOME");
+//                        System.out.println(i);
                         new Librarian(Librarian_username_pwdArrayList, name);
                         valid = true;
                         found = true;
