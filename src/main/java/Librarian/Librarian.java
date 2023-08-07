@@ -22,11 +22,12 @@ public class Librarian {
             System.out.println("ENTER YOUR ID");
             String id = scn.nextLine();
             if (librarianArrayList.get(index).getID().equals(id)){
-                System.out.println("Verified\n");
+                System.out.println("Verified");
+                System.out.println("WELCOME\n");
                 valid = true;
             }
         }
-        if (valid == true){
+        if (valid){
             librarianAccess();
         }
     }

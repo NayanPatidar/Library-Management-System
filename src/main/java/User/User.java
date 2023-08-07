@@ -13,10 +13,10 @@ public class User {
     public User(ArrayList<UserData> usersUsernamePwdArrayList, String name) {
         userSubArrayList = usersUsernamePwdArrayList;
         this.name = name;
-        System.out.println("YOU ARE IN USER CLASS !!\n");
-                for (UserData val : userSubArrayList){
-            System.out.println(val.getPassword() + " " + val.getUsername() + " " + val.getID());
-        }
+//        System.out.println("YOU ARE IN USER CLASS !!\n");
+//                for (UserData val : userSubArrayList){
+////            System.out.println(val.getPassword() + " " + val.getUsername() + " " + val.getID());
+//        }
         verifyUser();
     }
 
@@ -33,11 +33,12 @@ public class User {
             System.out.println("ENTER YOUR ID");
             String id = scn.nextLine();
             if (userSubArrayList.get(index).getID().equals(id)){
-                System.out.println("Verified\n");
+                System.out.println("Verified !!");
+                System.out.println("WELCOME\n");
                 valid = true;
             }
         }
-        if (valid == true){
+        if (valid){
             userAccess(index);
         }
     }
@@ -51,10 +52,8 @@ public class User {
             int input = scanner.nextInt();
 
             if (input == 1){
-                // TODO add check-account
                 new Accounts(userSubArrayList, index);
             }else if (input == 2){
-                // TODO add get book info
                 new Books(userSubArrayList, index);
 //                printData();
             }else if (input == 3){
@@ -85,12 +84,12 @@ public class User {
          return -1; // Return -1 if the element is not found
     }
 
-    private void printData(){
-        for (UserData values :userSubArrayList) {
-//            System.out.println(bookSubArrayList.get(index).getPassword() + " " + bookSubArrayList.get(index).getUsername()
-//                    + " " + bookSubArrayList.get(index).getID() + " " + bookSubArrayList.get(index).getBookName());
-
-        System.out.println(values.getBookName() + " " + values.getID() + " " + values.getUsername() + " " + values.getPassword());
-        }
-    }
+//    private void printData(){
+//        for (UserData values :userSubArrayList) {
+////            System.out.println(bookSubArrayList.get(index).getPassword() + " " + bookSubArrayList.get(index).getUsername()
+////                    + " " + bookSubArrayList.get(index).getID() + " " + bookSubArrayList.get(index).getBookName());
+//
+//        System.out.println(values.getBookName() + " " + values.getID() + " " + values.getUsername() + " " + values.getPassword());
+//        }
+//    }
 }
